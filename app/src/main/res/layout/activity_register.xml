@@ -38,7 +38,17 @@
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="Пароль (мин. 6 символов)"
+            android:inputType="textPassword"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"/>
+
+        <EditText
+            android:id="@+id/confirmPasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Подтвердите пароль"
             android:inputType="textPassword"
             android:layout_marginBottom="16dp"
             android:background="@drawable/edit_text_background"

@@ -38,6 +38,15 @@
         android:layout_marginBottom="16dp"/>
 
     <TextView
+        android:id="@+id/forgotPasswordTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Забыли пароль?"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
         android:id="@+id/goToRegisterActivityTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

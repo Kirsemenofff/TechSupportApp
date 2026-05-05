@@ -24,8 +24,11 @@ import com.itextpdf.layout.element.Paragraph;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ReportActivity extends AppCompatActivity {
 
@@ -117,12 +120,15 @@ public class ReportActivity extends AppCompatActivity {
 
         Document document = new Document(pdf);
 
-        document.add(new Paragraph("Task ID: " + task.getId()));
-        document.add(new Paragraph("Title: " + task.getTitle()));
-        document.add(new Paragraph("Description: " + task.getDescription()));
-        document.add(new Paragraph("Room Number: " + task.getRoomNumber()));
-        document.add(new Paragraph("Status: " + task.getStatus()));
-        document.add(new Paragraph("Timestamp: " + task.getTimestamp()));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
+        String formattedDate = sdf.format(new Date(task.getTimestamp()));
+
+        document.add(new Paragraph("ID заявки: " + task.getId()));
+        document.add(new Paragraph("Название: " + task.getTitle()));
+        document.add(new Paragraph("Описание: " + task.getDescription()));
+        document.add(new Paragraph("Номер аудитории: " + task.getRoomNumber()));
+        document.add(new Paragraph("Статус: " + task.getStatus()));
+        document.add(new Paragraph("Дата создания: " + formattedDate));
 
         document.close();
     }

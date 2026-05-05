@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +29,7 @@ import java.util.List;
 public class ViewTasksActivity extends AppCompatActivity {
 
     private ListView tasksListView;
+    private TextView emptyTextView;
     private TaskAdapter taskAdapter;
     private List<SupportTask> taskList;
     private List<SupportTask> filteredTaskList;
@@ -39,6 +42,7 @@ public class ViewTasksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_tasks);
 
         tasksListView = findViewById(R.id.tasksListView);
+        emptyTextView = findViewById(R.id.emptyTextView);
         statusSpinner = findViewById(R.id.statusSpinner);
 
         taskList = new ArrayList<>();
@@ -99,6 +103,7 @@ public class ViewTasksActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(ViewTasksActivity.this, "Ошибка загрузки заявок", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -115,6 +120,9 @@ public class ViewTasksActivity extends AppCompatActivity {
             }
         }
         taskAdapter.notifyDataSetChanged();
+        boolean isEmpty = filteredTaskList.isEmpty();
+        tasksListView.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
+        emptyTextView.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
     }
 
     private void showDeleteConfirmationDialog(final int position) {

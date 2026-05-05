@@ -21,6 +21,7 @@ import com.example.supportapplication.models.StatusChange;
 import com.example.supportapplication.models.SupportTask;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -202,7 +203,10 @@ public class TaskDetailActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    StatusChange statusChange = new StatusChange(newStatus, "user@example.com", System.currentTimeMillis());
+                    String currentUserEmail = FirebaseAuth.getInstance().getCurrentUser() != null
+                            ? FirebaseAuth.getInstance().getCurrentUser().getEmail()
+                            : "unknown";
+                    StatusChange statusChange = new StatusChange(newStatus, currentUserEmail, System.currentTimeMillis());
                     statusHistoryReference.push().setValue(statusChange);
                     Toast.makeText(TaskDetailActivity.this, "Status changed to " + newStatus, Toast.LENGTH_SHORT).show();
                 } else {

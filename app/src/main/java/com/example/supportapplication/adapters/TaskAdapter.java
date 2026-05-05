@@ -20,20 +20,33 @@ public class TaskAdapter extends ArrayAdapter<SupportTask> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        SupportTask task = getItem(position);
+        ViewHolder holder;
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_task, parent, false);
+            holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        TextView titleTextView = convertView.findViewById(R.id.taskTitle);
-        TextView statusTextView = convertView.findViewById(R.id.taskStatus);
-        TextView descriptionTextView = convertView.findViewById(R.id.taskDescription);
-
-        titleTextView.setText(task.getTitle());
-        statusTextView.setText(task.getStatus());
-        descriptionTextView.setText(task.getDescription());
+        SupportTask task = getItem(position);
+        holder.title.setText(task.getTitle());
+        holder.status.setText(task.getStatus());
+        holder.description.setText(task.getDescription());
 
         return convertView;
+    }
+
+    static class ViewHolder {
+        final TextView title;
+        final TextView status;
+        final TextView description;
+
+        ViewHolder(View view) {
+            title = view.findViewById(R.id.taskTitle);
+            status = view.findViewById(R.id.taskStatus);
+            description = view.findViewById(R.id.taskDescription);
+        }
     }
 }

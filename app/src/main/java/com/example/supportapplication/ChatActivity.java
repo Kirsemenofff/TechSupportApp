@@ -86,6 +86,10 @@ public class ChatActivity extends AppCompatActivity {
     private void sendMessage() {
         String messageText = messageEditText.getText().toString().trim();
         if (!messageText.isEmpty()) {
+            if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                Toast.makeText(this, "Необходимо войти в систему", Toast.LENGTH_SHORT).show();
+                return;
+            }
             String messageId = messagesReference.push().getKey();
             String sender = FirebaseAuth.getInstance().getCurrentUser().getUid();
             long timestamp = System.currentTimeMillis();
