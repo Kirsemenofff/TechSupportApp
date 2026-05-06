@@ -2,25 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="end"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:gravity="end"
+    android:paddingHorizontal="4dp"
+    android:paddingVertical="4dp">
 
     <TextView
         android:id="@+id/messageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/message_background_sent"
-        android:padding="10dp"
-        android:text="Message"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"/>
+        android:padding="12dp"
+        android:paddingHorizontal="14dp"
+        android:text="Сообщение"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:maxWidth="260dp"/>
 
     <TextView
         android:id="@+id/messageTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="12sp"
-        android:paddingTop="4dp"/>
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="11sp"
+        android:paddingTop="3dp"
+        android:paddingEnd="2dp"/>
 </LinearLayout>

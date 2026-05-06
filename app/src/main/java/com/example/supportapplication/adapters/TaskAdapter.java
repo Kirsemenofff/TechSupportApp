@@ -1,6 +1,7 @@
 package com.example.supportapplication.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,18 @@ public class TaskAdapter extends ArrayAdapter<SupportTask> {
         holder.title.setText(task.getTitle());
         holder.status.setText(task.getStatus());
         holder.description.setText(task.getDescription());
+
+        switch (task.getStatus()) {
+            case "Completed":
+                holder.status.setTextColor(Color.parseColor("#10B981"));
+                break;
+            case "In Progress":
+                holder.status.setTextColor(Color.parseColor("#3B82F6"));
+                break;
+            default:
+                holder.status.setTextColor(Color.parseColor("#F59E0B"));
+                break;
+        }
 
         return convertView;
     }

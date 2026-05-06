@@ -1,52 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp">
+    android:orientation="vertical"
+    android:background="@color/backgroundColor"
+    android:fitsSystemWindows="true">
 
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/header_gradient"
+        android:paddingTop="32dp"
+        android:paddingBottom="16dp"
+        android:paddingHorizontal="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Чат"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Обсуждение заявки"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="13sp"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
+
+    <!-- Messages list -->
     <ListView
         android:id="@+id/messagesListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_above="@id/messageInputLayout"
-        android:layout_alignParentTop="true"
+        android:layout_weight="1"
         android:divider="@android:color/transparent"
-        android:dividerHeight="8dp"
+        android:dividerHeight="0dp"
+        android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:clipToPadding="false"/>
+        android:paddingHorizontal="12dp"
+        android:clipToPadding="false"
+        android:background="@color/backgroundColor"
+        android:transcriptMode="alwaysScroll"/>
 
+    <!-- Input bar -->
     <LinearLayout
         android:id="@+id/messageInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:background="@color/surface"
         android:orientation="horizontal"
         android:padding="8dp"
-        android:background="@android:color/white"
-        android:elevation="4dp">
+        android:gravity="center_vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/borderColor"
+            android:layout_gravity="top"/>
 
         <EditText
             android:id="@+id/messageEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Type a message"
-            android:background="@android:color/transparent"
-            android:padding="10dp"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
+            android:hint="Напишите сообщение…"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
+            android:textColor="@color/primaryTextColor"
+            android:textColorHint="@color/hintTextColor"
+            android:textSize="15sp"
             android:inputType="textCapSentences|textMultiLine"
             android:maxLines="4"
-            android:scrollHorizontally="false"/>
+            android:scrollHorizontally="false"
+            android:layout_marginEnd="8dp"/>
 
         <Button
             android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send"
-            android:background="@android:color/holo_blue_light"
-            android:textColor="@android:color/white"
-            android:padding="10dp"
-            android:layout_marginStart="8dp"/>
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:text="→"
+            android:background="@drawable/button_background"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:padding="0dp"
+            android:stateListAnimator="@null"/>
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

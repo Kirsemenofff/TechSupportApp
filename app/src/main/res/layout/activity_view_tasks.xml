@@ -3,47 +3,93 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@color/backgroundColor">
+    android:background="@color/backgroundColor"
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:id="@+id/tasksTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Заявки"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
-        android:paddingBottom="16dp"/>
-
-    <Spinner
-        android:id="@+id/statusSpinner"
+    <!-- Header -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/spinner_background"
-        android:padding="12dp" />
+        android:background="@drawable/header_gradient"
+        android:orientation="vertical"
+        android:paddingTop="32dp"
+        android:paddingBottom="20dp"
+        android:paddingHorizontal="20dp">
 
+        <TextView
+            android:id="@+id/tasksTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Заявки"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Управление обращениями"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="13sp"
+            android:layout_marginTop="2dp"/>
+    </LinearLayout>
+
+    <!-- Filter bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Статус:"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="13sp"
+            android:layout_marginEnd="10dp"/>
+
+        <Spinner
+            android:id="@+id/statusSpinner"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            android:paddingStart="12dp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/borderColor"/>
+
+    <!-- List -->
     <ListView
         android:id="@+id/tasksListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:divider="@android:color/transparent"
-        android:dividerHeight="8dp"
+        android:dividerHeight="0dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
+        android:paddingHorizontal="12dp"
         android:clipToPadding="false"
-        android:background="@drawable/listview_background"/>
+        android:background="@color/backgroundColor"/>
 
+    <!-- Empty state -->
     <TextView
         android:id="@+id/emptyTextView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Нет заявок"
+        android:text="Заявок нет"
         android:textSize="16sp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/secondaryTextColor"
         android:visibility="gone"/>
 </LinearLayout>

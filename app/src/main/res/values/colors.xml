@@ -1,16 +1,34 @@
 <resources>
-    <color name="backgroundColor">#FFFFFF</color>
-    <color name="inputBackgroundColor">#F1F1F1</color>
-    <color name="colorPrimary">#1E88E5</color>
-    <color name="colorPrimaryDark">#1565C0</color>
-    <color name="colorAccent">#42A5F5</color>
-    <color name="primaryTextColor">#FFFFFF</color>
-    <color name="secondaryTextColor">#757575</color>
-    <color name="sentMessageBackground">#BBDEFB</color>
-    <color name="receivedMessageBackground">#E3F2FD</color>
-    <color name="spinnerBackground">#FFFFFF</color>
-    <color name="listViewBackground">#FFFFFF</color>
+    <!-- Background layers -->
+    <color name="backgroundColor">#0F172A</color>
+    <color name="surface">#1E293B</color>
+    <color name="surfaceElevated">#243447</color>
+    <color name="borderColor">#334155</color>
+
+    <!-- Brand -->
+    <color name="colorPrimary">#6366F1</color>
+    <color name="colorPrimaryDark">#4F46E5</color>
+    <color name="colorPrimaryLight">#818CF8</color>
+    <color name="colorAccent">#38BDF8</color>
+
+    <!-- Text -->
+    <color name="primaryTextColor">#F1F5F9</color>
+    <color name="secondaryTextColor">#94A3B8</color>
+    <color name="hintTextColor">#64748B</color>
     <color name="white">#FFFFFF</color>
+
+    <!-- Status -->
+    <color name="statusPending">#F59E0B</color>
+    <color name="statusInProgress">#3B82F6</color>
+    <color name="statusCompleted">#10B981</color>
+    <color name="statusError">#EF4444</color>
+
+    <!-- Chat bubbles -->
+    <color name="sentMessageBackground">#4F46E5</color>
+    <color name="receivedMessageBackground">#1E293B</color>
+
+    <!-- Legacy aliases -->
+    <color name="inputBackgroundColor">#1E293B</color>
+    <color name="spinnerBackground">#1E293B</color>
+    <color name="listViewBackground">#00000000</color>
 </resources>
-
-
