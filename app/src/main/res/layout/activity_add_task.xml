@@ -103,9 +103,26 @@
                 android:hint="Например: 215"
                 android:background="@drawable/edit_text_background"
                 android:padding="14dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="16dp"
                 android:textColor="@color/primaryTextColor"
                 android:textColorHint="@color/hintTextColor"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Приоритет"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"/>
+
+            <Spinner
+                android:id="@+id/prioritySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/edit_text_background"
+                android:padding="8dp"
+                android:paddingStart="12dp"
+                android:layout_marginBottom="20dp"/>
 
             <Button
                 android:id="@+id/attachFileButton"

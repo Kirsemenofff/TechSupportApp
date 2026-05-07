@@ -24,6 +24,7 @@ import java.util.List;
 public class ChatActivity extends AppCompatActivity {
 
     private DatabaseReference messagesReference;
+    private ValueEventListener messagesListener;
     private ListView messagesListView;
     private EditText messageEditText;
     private Button sendButton;
@@ -38,7 +39,7 @@ public class ChatActivity extends AppCompatActivity {
 
         taskId = getIntent().getStringExtra("taskId");
         if (taskId == null || taskId.isEmpty()) {
-            Toast.makeText(this, "Invalid task ID", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Неверный ID заявки", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -51,7 +52,8 @@ public class ChatActivity extends AppCompatActivity {
         messageAdapter = new MessageAdapter(this, messageList);
         messagesListView.setAdapter(messageAdapter);
 
-        messagesReference = FirebaseDatabase.getInstance().getReference("tasks").child(taskId).child("messages");
+        messagesReference = FirebaseDatabase.getInstance()
+                .getReference("tasks").child(taskId).child("messages");
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,23 +66,26 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void loadMessages() {
-        messagesReference.addValueEventListener(new ValueEventListener() {
+        messagesListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 messageList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Message message = snapshot.getValue(Message.class);
-                    messageList.add(message);
+                    if (message != null) messageList.add(message);
                 }
                 messageAdapter.notifyDataSetChanged();
-                messagesListView.setSelection(messageList.size() - 1);
+                if (!messageList.isEmpty()) {
+                    messagesListView.setSelection(messageList.size() - 1);
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ChatActivity.this, "Failed to load messages", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatActivity.this, "Ошибка загрузки сообщений", Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+        messagesReference.addValueEventListener(messagesListener);
     }
 
     private void sendMessage() {
@@ -96,9 +101,15 @@ public class ChatActivity extends AppCompatActivity {
 
             Message message = new Message(messageId, messageText, sender, timestamp);
             messagesReference.child(messageId).setValue(message);
-
             messageEditText.setText("");
-            messagesListView.setSelection(messageAdapter.getCount() - 1);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (messagesListener != null) {
+            messagesReference.removeEventListener(messagesListener);
         }
     }
 }

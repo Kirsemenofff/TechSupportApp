@@ -11,9 +11,15 @@ import android.widget.TextView;
 import com.example.supportapplication.R;
 import com.example.supportapplication.models.SupportTask;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class TaskAdapter extends ArrayAdapter<SupportTask> {
+
+    private static final SimpleDateFormat DATE_FORMAT =
+            new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
 
     public TaskAdapter(Context context, List<SupportTask> tasks) {
         super(context, 0, tasks);
@@ -32,10 +38,14 @@ public class TaskAdapter extends ArrayAdapter<SupportTask> {
         }
 
         SupportTask task = getItem(position);
-        holder.title.setText(task.getTitle());
-        holder.status.setText(task.getStatus());
-        holder.description.setText(task.getDescription());
 
+        holder.title.setText(task.getTitle());
+        holder.description.setText(task.getDescription());
+        holder.status.setText(task.getStatus());
+        holder.priority.setText(task.getPriority());
+        holder.date.setText(DATE_FORMAT.format(new Date(task.getTimestamp())));
+
+        // Status color
         switch (task.getStatus()) {
             case "Completed":
                 holder.status.setTextColor(Color.parseColor("#10B981"));
@@ -48,6 +58,22 @@ public class TaskAdapter extends ArrayAdapter<SupportTask> {
                 break;
         }
 
+        // Priority color
+        switch (task.getPriority()) {
+            case "Критический":
+                holder.priority.setTextColor(Color.parseColor("#EF4444"));
+                break;
+            case "Высокий":
+                holder.priority.setTextColor(Color.parseColor("#F59E0B"));
+                break;
+            case "Средний":
+                holder.priority.setTextColor(Color.parseColor("#3B82F6"));
+                break;
+            default:
+                holder.priority.setTextColor(Color.parseColor("#10B981"));
+                break;
+        }
+
         return convertView;
     }
 
@@ -55,11 +81,15 @@ public class TaskAdapter extends ArrayAdapter<SupportTask> {
         final TextView title;
         final TextView status;
         final TextView description;
+        final TextView priority;
+        final TextView date;
 
         ViewHolder(View view) {
-            title = view.findViewById(R.id.taskTitle);
-            status = view.findViewById(R.id.taskStatus);
+            title       = view.findViewById(R.id.taskTitle);
+            status      = view.findViewById(R.id.taskStatus);
             description = view.findViewById(R.id.taskDescription);
+            priority    = view.findViewById(R.id.taskPriority);
+            date        = view.findViewById(R.id.taskDate);
         }
     }
 }

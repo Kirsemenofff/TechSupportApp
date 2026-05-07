@@ -13,7 +13,7 @@
         android:background="@drawable/header_gradient"
         android:orientation="vertical"
         android:paddingTop="32dp"
-        android:paddingBottom="20dp"
+        android:paddingBottom="16dp"
         android:paddingHorizontal="20dp">
 
         <TextView
@@ -34,26 +34,53 @@
             android:layout_marginTop="2dp"/>
     </LinearLayout>
 
-    <!-- Filter bar -->
+    <!-- Search bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/surface"
         android:paddingHorizontal="16dp"
-        android:paddingVertical="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="6dp">
+
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:hint="Поиск по названию, описанию, аудитории…"
+            android:background="@drawable/edit_text_background"
+            android:padding="10dp"
+            android:paddingStart="14dp"
+            android:textColor="@color/primaryTextColor"
+            android:textColorHint="@color/hintTextColor"
+            android:textSize="14sp"
+            android:inputType="text"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"/>
+    </LinearLayout>
+
+    <!-- Filter + Sort bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="10dp"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Статус:"
-            android:textColor="@color/secondaryTextColor"
-            android:textSize="13sp"
-            android:layout_marginEnd="10dp"/>
-
         <Spinner
             android:id="@+id/statusSpinner"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            android:paddingStart="12dp"/>
+
+        <Spinner
+            android:id="@+id/sortSpinner"
             android:layout_width="0dp"
             android:layout_height="44dp"
             android:layout_weight="1"
@@ -67,7 +94,7 @@
         android:layout_height="1dp"
         android:background="@color/borderColor"/>
 
-    <!-- List -->
+    <!-- Task list -->
     <ListView
         android:id="@+id/tasksListView"
         android:layout_width="match_parent"
@@ -92,4 +119,5 @@
         android:textSize="16sp"
         android:textColor="@color/secondaryTextColor"
         android:visibility="gone"/>
+
 </LinearLayout>

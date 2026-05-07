@@ -42,11 +42,14 @@ public class TaskDetailActivity extends AppCompatActivity {
     private Button viewFileButton;
     private Button chatButton;
     private Button viewHistoryButton;
+    private Button editTaskButton;
     private ListView checklistListView;
     private Button saveChecklistButton;
 
     private DatabaseReference taskReference;
     private DatabaseReference statusHistoryReference;
+    private ValueEventListener taskListener;
+    private ValueEventListener statusHistoryListener;
     private String taskId;
     private SupportTask currentTask;
     private ChecklistAdapter checklistAdapter;
@@ -67,12 +70,13 @@ public class TaskDetailActivity extends AppCompatActivity {
         viewFileButton = findViewById(R.id.viewFileButton);
         chatButton = findViewById(R.id.chatButton);
         viewHistoryButton = findViewById(R.id.viewHistoryButton);
+        editTaskButton = findViewById(R.id.editTaskButton);
         checklistListView = findViewById(R.id.checklistListView);
         saveChecklistButton = findViewById(R.id.saveChecklistButton);
 
         taskId = getIntent().getStringExtra("taskId");
         if (taskId == null || taskId.isEmpty()) {
-            Toast.makeText(this, "Invalid task ID", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Неверный ID заявки", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -119,7 +123,6 @@ public class TaskDetailActivity extends AppCompatActivity {
         });
 
 
-        viewHistoryButton = findViewById(R.id.viewHistoryButton);
         viewHistoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,7 +132,14 @@ public class TaskDetailActivity extends AppCompatActivity {
             }
         });
 
-
+        editTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TaskDetailActivity.this, EditTaskActivity.class);
+                intent.putExtra("taskId", taskId);
+                startActivity(intent);
+            }
+        });
 
         saveChecklistButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +150,7 @@ public class TaskDetailActivity extends AppCompatActivity {
     }
 
     private void loadTaskDetails() {
-        taskReference.addValueEventListener(new ValueEventListener() {
+        taskListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentTask = dataSnapshot.getValue(SupportTask.class);
@@ -165,20 +175,21 @@ public class TaskDetailActivity extends AppCompatActivity {
                     }
                     checklistAdapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(TaskDetailActivity.this, "Task not found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TaskDetailActivity.this, "Заявка не найдена", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(TaskDetailActivity.this, "Failed to load task details", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TaskDetailActivity.this, "Ошибка загрузки заявки", Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+        taskReference.addValueEventListener(taskListener);
     }
 
     private void loadStatusHistory() {
-        statusHistoryReference.addValueEventListener(new ValueEventListener() {
+        statusHistoryListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 statusChangeList.clear();
@@ -191,9 +202,17 @@ public class TaskDetailActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(TaskDetailActivity.this, "Failed to load status history", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TaskDetailActivity.this, "Ошибка загрузки истории статусов", Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+        statusHistoryReference.addValueEventListener(statusHistoryListener);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (taskListener != null) taskReference.removeEventListener(taskListener);
+        if (statusHistoryListener != null) statusHistoryReference.removeEventListener(statusHistoryListener);
     }
 
     private void changeTaskStatus() {
@@ -208,9 +227,9 @@ public class TaskDetailActivity extends AppCompatActivity {
                             : "unknown";
                     StatusChange statusChange = new StatusChange(newStatus, currentUserEmail, System.currentTimeMillis());
                     statusHistoryReference.push().setValue(statusChange);
-                    Toast.makeText(TaskDetailActivity.this, "Status changed to " + newStatus, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TaskDetailActivity.this, "Статус изменён на " + newStatus, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(TaskDetailActivity.this, "Failed to change status", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TaskDetailActivity.this, "Ошибка изменения статуса", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -222,9 +241,9 @@ public class TaskDetailActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(TaskDetailActivity.this, "Checklist saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TaskDetailActivity.this, "Чек-лист сохранён", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(TaskDetailActivity.this, "Failed to save checklist", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TaskDetailActivity.this, "Ошибка сохранения чек-листа", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -236,7 +255,7 @@ public class TaskDetailActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(fileUrl));
             startActivity(intent);
         } else {
-            Toast.makeText(this, "No file attached to this task", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "К заявке не прикреплён файл", Toast.LENGTH_SHORT).show();
         }
     }
 }
