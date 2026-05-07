@@ -1,6 +1,8 @@
 package com.example.supportapplication;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import com.example.supportapplication.adapters.ChecklistAdapter;
 import com.example.supportapplication.adapters.StatusHistoryAdapter;
@@ -37,12 +43,15 @@ public class TaskDetailActivity extends AppCompatActivity {
     private TextView titleTextView;
     private TextView descriptionTextView;
     private TextView roomNumberTextView;
+    private TextView categoryTextView;
+    private TextView dueDateTextView;
     private Spinner statusSpinner;
     private Button changeStatusButton;
     private Button viewFileButton;
     private Button chatButton;
     private Button viewHistoryButton;
     private Button editTaskButton;
+    private Button deleteTaskButton;
     private ListView checklistListView;
     private Button saveChecklistButton;
 
@@ -62,16 +71,19 @@ public class TaskDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_detail);
 
-        titleTextView = findViewById(R.id.titleTextView);
+        titleTextView      = findViewById(R.id.titleTextView);
         descriptionTextView = findViewById(R.id.descriptionTextView);
         roomNumberTextView = findViewById(R.id.roomNumberTextView);
-        statusSpinner = findViewById(R.id.statusSpinner);
+        categoryTextView   = findViewById(R.id.categoryTextView);
+        dueDateTextView    = findViewById(R.id.dueDateTextView);
+        statusSpinner      = findViewById(R.id.statusSpinner);
         changeStatusButton = findViewById(R.id.changeStatusButton);
-        viewFileButton = findViewById(R.id.viewFileButton);
-        chatButton = findViewById(R.id.chatButton);
-        viewHistoryButton = findViewById(R.id.viewHistoryButton);
-        editTaskButton = findViewById(R.id.editTaskButton);
-        checklistListView = findViewById(R.id.checklistListView);
+        viewFileButton     = findViewById(R.id.viewFileButton);
+        chatButton         = findViewById(R.id.chatButton);
+        viewHistoryButton  = findViewById(R.id.viewHistoryButton);
+        editTaskButton     = findViewById(R.id.editTaskButton);
+        deleteTaskButton   = findViewById(R.id.deleteTaskButton);
+        checklistListView  = findViewById(R.id.checklistListView);
         saveChecklistButton = findViewById(R.id.saveChecklistButton);
 
         taskId = getIntent().getStringExtra("taskId");
@@ -141,6 +153,13 @@ public class TaskDetailActivity extends AppCompatActivity {
             }
         });
 
+        deleteTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDeleteConfirmation();
+            }
+        });
+
         saveChecklistButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,6 +178,22 @@ public class TaskDetailActivity extends AppCompatActivity {
                     descriptionTextView.setText(currentTask.getDescription());
                     roomNumberTextView.setText(currentTask.getRoomNumber());
                     statusSpinner.setSelection(((ArrayAdapter<String>) statusSpinner.getAdapter()).getPosition(currentTask.getStatus()));
+
+                    String cat = currentTask.getCategory();
+                    categoryTextView.setText((cat != null && !cat.isEmpty()) ? cat : "—");
+
+                    long due = currentTask.getDueDate();
+                    if (due > 0) {
+                        String dueDateStr = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+                                .format(new Date(due));
+                        dueDateTextView.setText(dueDateStr);
+                        boolean overdue = due < System.currentTimeMillis()
+                                && !currentTask.getStatus().equals("Completed");
+                        dueDateTextView.setTextColor(Color.parseColor(overdue ? "#EF4444" : "#94A3B8"));
+                    } else {
+                        dueDateTextView.setText("Не задан");
+                        dueDateTextView.setTextColor(Color.parseColor("#64748B"));
+                    }
 
                     checklist.clear();
                     if (currentTask.getChecklist() != null) {
@@ -206,6 +241,24 @@ public class TaskDetailActivity extends AppCompatActivity {
             }
         };
         statusHistoryReference.addValueEventListener(statusHistoryListener);
+    }
+
+    private void showDeleteConfirmation() {
+        new AlertDialog.Builder(this)
+                .setTitle("Удалить заявку")
+                .setMessage("Это действие необратимо. Удалить заявку «" + currentTask.getTitle() + "»?")
+                .setPositiveButton("Удалить", (d, w) -> {
+                    taskReference.removeValue().addOnCompleteListener(t -> {
+                        if (t.isSuccessful()) {
+                            Toast.makeText(this, "Заявка удалена", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(this, "Ошибка удаления", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                })
+                .setNegativeButton("Отмена", null)
+                .show();
     }
 
     @Override

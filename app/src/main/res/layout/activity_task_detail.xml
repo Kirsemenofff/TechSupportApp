@@ -71,15 +71,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Аудитория"
                         android:textColor="@color/secondaryTextColor"
-                        android:textSize="13sp"
-                        android:layout_weight="0"/>
+                        android:textSize="13sp"/>
 
                     <TextView
                         android:id="@+id/roomNumberTextView"
@@ -89,6 +89,57 @@
                         android:text=""
                         android:textColor="@color/primaryTextColor"
                         android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:gravity="end"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Категория"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/categoryTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="—"
+                        android:textColor="@color/colorPrimaryLight"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:gravity="end"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Срок выполнения"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/dueDateTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Не задан"
+                        android:textColor="@color/hintTextColor"
+                        android:textSize="13sp"
                         android:textStyle="bold"
                         android:gravity="end"/>
                 </LinearLayout>
@@ -191,6 +242,17 @@
                     android:layout_height="48dp"
                     android:text="Редактировать заявку"
                     android:background="@drawable/button_background_dark"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:stateListAnimator="@null"
+                    android:layout_marginBottom="8dp"/>
+
+                <Button
+                    android:id="@+id/deleteTaskButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Удалить заявку"
+                    android:background="@drawable/button_danger"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:stateListAnimator="@null"/>

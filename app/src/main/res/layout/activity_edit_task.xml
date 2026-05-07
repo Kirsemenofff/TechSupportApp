@@ -138,7 +138,43 @@
                     android:layout_height="50dp"
                     android:background="@drawable/spinner_background"
                     android:padding="8dp"
-                    android:paddingStart="12dp"/>
+                    android:paddingStart="12dp"
+                    android:layout_marginBottom="14dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Категория"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp"/>
+
+                <Spinner
+                    android:id="@+id/categorySpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/spinner_background"
+                    android:padding="8dp"
+                    android:paddingStart="12dp"
+                    android:layout_marginBottom="14dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Срок выполнения (необязательно)"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="4dp"/>
+
+                <Button
+                    android:id="@+id/dueDateButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Выбрать дату"
+                    android:background="@drawable/button_background_dark"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="14sp"
+                    android:stateListAnimator="@null"/>
             </LinearLayout>
 
             <Button
