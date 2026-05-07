@@ -3,20 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:background="@color/surfaceElevated"
+    android:padding="12dp"
+    android:layout_marginBottom="4dp"
+    android:gravity="center_vertical">
 
     <TextView
         android:id="@+id/checklistItemDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Description"
-        android:textSize="16sp"
-        android:padding="8dp" />
+        android:text="Пункт чек-листа"
+        android:textSize="14sp"
+        android:textColor="@color/primaryTextColor"
+        android:layout_marginEnd="8dp"/>
 
     <CheckBox
         android:id="@+id/checklistItemCheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp" />
+        android:buttonTint="@color/colorPrimary"/>
 </LinearLayout>

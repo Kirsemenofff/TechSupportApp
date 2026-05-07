@@ -1,145 +1,301 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor">
+    android:orientation="vertical"
+    android:background="@color/backgroundColor"
+    android:fitsSystemWindows="true">
 
+    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:background="@drawable/header_gradient"
+        android:paddingTop="32dp"
+        android:paddingBottom="20dp"
+        android:paddingHorizontal="20dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:text="Заявка"
+            android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
-            android:paddingBottom="8dp" />
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/descriptionTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Description"
-            android:textSize="16sp"
+            android:text=""
             android:textColor="@color/secondaryTextColor"
-            android:paddingBottom="8dp" />
-
-        <TextView
-            android:id="@+id/roomNumberTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Room Number"
-            android:textSize="16sp"
-            android:textColor="@color/secondaryTextColor"
-            android:paddingBottom="8dp" />
-
-        <Spinner
-            android:id="@+id/statusSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/spinner_background"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
-        <Button
-            android:id="@+id/changeStatusButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Сохранить изменения статуса"
-            android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"
-            android:stateListAnimator="@null"
-            android:elevation="4dp"
-            android:layout_gravity="center_horizontal"
-            android:drawablePadding="8dp"
-            android:radius="8dp"/>
-
-        <Button
-            android:id="@+id/viewFileButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Просмотреть файл"
-            android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"
-            android:stateListAnimator="@null"
-            android:elevation="4dp"
-            android:layout_gravity="center_horizontal"
-            android:drawablePadding="8dp"
-            android:radius="8dp"/>
-
-        <Button
-            android:id="@+id/chatButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Чат"
-            android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"
-            android:stateListAnimator="@null"
-            android:elevation="4dp"
-            android:layout_gravity="center_horizontal"
-            android:drawablePadding="8dp"
-            android:radius="8dp"/>
-
-        <Button
-            android:id="@+id/viewHistoryButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Просмотр истории смены статуса"
-            android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"
-            android:stateListAnimator="@null"
-            android:elevation="4dp"
-            android:layout_gravity="center_horizontal"
-            android:drawablePadding="8dp"
-            android:radius="8dp"/>
-
-        <TextView
-            android:id="@+id/checklistTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Чек-лист"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp" />
-
-        <ListView
-            android:id="@+id/checklistListView"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="8dp"
-            android:background="@drawable/listview_background"
-            android:padding="8dp"
-            android:elevation="4dp"
-            android:layout_marginBottom="16dp"
-            android:clipToPadding="false"/>
-
-        <Button
-            android:id="@+id/saveChecklistButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Сохранить чек-лист"
-            android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"
-            android:padding="12dp"
-            android:layout_gravity="center_horizontal"
-            android:elevation="4dp"
-            android:stateListAnimator="@null"
-            android:radius="8dp"/>
+            android:textSize="13sp"
+            android:layout_marginTop="4dp"
+            android:maxLines="2"
+            android:ellipsize="end"/>
     </LinearLayout>
-</ScrollView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Info card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_background"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ИНФОРМАЦИЯ"
+                    android:textColor="@color/colorPrimaryLight"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1"
+                    android:layout_marginBottom="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Аудитория"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/roomNumberTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:gravity="end"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Категория"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/categoryTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="—"
+                        android:textColor="@color/colorPrimaryLight"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:gravity="end"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Срок выполнения"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/dueDateTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Не задан"
+                        android:textColor="@color/hintTextColor"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:gravity="end"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Status card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_background"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="СТАТУС"
+                    android:textColor="@color/colorPrimaryLight"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1"
+                    android:layout_marginBottom="10dp"/>
+
+                <Spinner
+                    android:id="@+id/statusSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/edit_text_background"
+                    android:padding="8dp"
+                    android:paddingStart="12dp"
+                    android:layout_marginBottom="12dp"/>
+
+                <Button
+                    android:id="@+id/changeStatusButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Сохранить статус"
+                    android:background="@drawable/button_background"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:stateListAnimator="@null"/>
+            </LinearLayout>
+
+            <!-- Actions card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_background"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ДЕЙСТВИЯ"
+                    android:textColor="@color/colorPrimaryLight"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1"
+                    android:layout_marginBottom="10dp"/>
+
+                <Button
+                    android:id="@+id/chatButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Открыть чат"
+                    android:background="@drawable/button_background"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:stateListAnimator="@null"
+                    android:layout_marginBottom="8dp"/>
+
+                <Button
+                    android:id="@+id/viewFileButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Просмотреть файл"
+                    android:background="@drawable/button_background_dark"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:stateListAnimator="@null"
+                    android:layout_marginBottom="8dp"/>
+
+                <Button
+                    android:id="@+id/viewHistoryButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="История статусов"
+                    android:background="@drawable/button_background_dark"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:stateListAnimator="@null"
+                    android:layout_marginBottom="8dp"/>
+
+                <Button
+                    android:id="@+id/editTaskButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Редактировать заявку"
+                    android:background="@drawable/button_background_dark"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:stateListAnimator="@null"
+                    android:layout_marginBottom="8dp"/>
+
+                <Button
+                    android:id="@+id/deleteTaskButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Удалить заявку"
+                    android:background="@drawable/button_danger"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:stateListAnimator="@null"/>
+            </LinearLayout>
+
+            <!-- Checklist card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_background"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/checklistTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ЧЕК-ЛИСТ"
+                    android:textColor="@color/colorPrimaryLight"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1"
+                    android:layout_marginBottom="10dp"/>
+
+                <ListView
+                    android:id="@+id/checklistListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="360dp"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="4dp"
+                    android:layout_marginBottom="12dp"/>
+
+                <Button
+                    android:id="@+id/saveChecklistButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Сохранить чек-лист"
+                    android:background="@drawable/button_background"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:stateListAnimator="@null"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

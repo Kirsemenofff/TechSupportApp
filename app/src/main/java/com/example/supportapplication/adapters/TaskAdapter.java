@@ -1,6 +1,7 @@
 package com.example.supportapplication.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,15 @@ import android.widget.TextView;
 import com.example.supportapplication.R;
 import com.example.supportapplication.models.SupportTask;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class TaskAdapter extends ArrayAdapter<SupportTask> {
+
+    private static final SimpleDateFormat DATE_FORMAT =
+            new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
 
     public TaskAdapter(Context context, List<SupportTask> tasks) {
         super(context, 0, tasks);
@@ -20,20 +27,69 @@ public class TaskAdapter extends ArrayAdapter<SupportTask> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        SupportTask task = getItem(position);
+        ViewHolder holder;
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_task, parent, false);
+            holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        TextView titleTextView = convertView.findViewById(R.id.taskTitle);
-        TextView statusTextView = convertView.findViewById(R.id.taskStatus);
-        TextView descriptionTextView = convertView.findViewById(R.id.taskDescription);
+        SupportTask task = getItem(position);
 
-        titleTextView.setText(task.getTitle());
-        statusTextView.setText(task.getStatus());
-        descriptionTextView.setText(task.getDescription());
+        holder.title.setText(task.getTitle());
+        holder.description.setText(task.getDescription());
+        holder.status.setText(task.getStatus());
+        holder.priority.setText(task.getPriority());
+        holder.date.setText(DATE_FORMAT.format(new Date(task.getTimestamp())));
+
+        // Status color
+        switch (task.getStatus()) {
+            case "Completed":
+                holder.status.setTextColor(Color.parseColor("#10B981"));
+                break;
+            case "In Progress":
+                holder.status.setTextColor(Color.parseColor("#3B82F6"));
+                break;
+            default:
+                holder.status.setTextColor(Color.parseColor("#F59E0B"));
+                break;
+        }
+
+        // Priority color
+        switch (task.getPriority()) {
+            case "Критический":
+                holder.priority.setTextColor(Color.parseColor("#EF4444"));
+                break;
+            case "Высокий":
+                holder.priority.setTextColor(Color.parseColor("#F59E0B"));
+                break;
+            case "Средний":
+                holder.priority.setTextColor(Color.parseColor("#3B82F6"));
+                break;
+            default:
+                holder.priority.setTextColor(Color.parseColor("#10B981"));
+                break;
+        }
 
         return convertView;
+    }
+
+    static class ViewHolder {
+        final TextView title;
+        final TextView status;
+        final TextView description;
+        final TextView priority;
+        final TextView date;
+
+        ViewHolder(View view) {
+            title       = view.findViewById(R.id.taskTitle);
+            status      = view.findViewById(R.id.taskStatus);
+            description = view.findViewById(R.id.taskDescription);
+            priority    = view.findViewById(R.id.taskPriority);
+            date        = view.findViewById(R.id.taskDate);
+        }
     }
 }

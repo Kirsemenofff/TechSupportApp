@@ -1,66 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/backgroundColor"
-    android:padding="16dp">
+    android:fitsSystemWindows="true">
 
+    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@color/white"
-        android:elevation="4dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp">
+        android:background="@drawable/header_gradient"
+        android:paddingTop="32dp"
+        android:paddingBottom="20dp"
+        android:paddingHorizontal="20dp"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/titleEditText"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Название"
-            android:background="@drawable/edit_text_background"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
+            android:text="Новая заявка"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
 
-        <EditText
-            android:id="@+id/descriptionEditText"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Описание проблемы"
-            android:background="@drawable/edit_text_background"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
-
-        <EditText
-            android:id="@+id/roomNumberEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Номер аудитории"
-            android:background="@drawable/edit_text_background"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
-
-        <Button
-            android:id="@+id/attachFileButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Загрузите файл"
-            android:background="@drawable/button_background"
-            android:textColor="@android:color/white"
-            android:padding="12dp"
-            android:elevation="4dp"
-            android:layout_marginBottom="16dp"/>
-
-        <Button
-            android:id="@+id/saveTaskButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Создать заявку"
-            android:background="@drawable/button_background_dark"
-            android:textColor="@android:color/white"
-            android:padding="12dp"
-            android:elevation="4dp"/>
+            android:text="Опишите проблему"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="13sp"
+            android:layout_marginTop="2dp"/>
     </LinearLayout>
-</ScrollView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_background"
+            android:margin="16dp"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Название"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/titleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Кратко опишите суть"
+                android:background="@drawable/edit_text_background"
+                android:padding="14dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/primaryTextColor"
+                android:textColorHint="@color/hintTextColor"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Описание проблемы"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/descriptionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Подробно опишите проблему"
+                android:background="@drawable/edit_text_background"
+                android:padding="14dp"
+                android:layout_marginBottom="16dp"
+                android:minLines="3"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:textColor="@color/primaryTextColor"
+                android:textColorHint="@color/hintTextColor"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Номер аудитории"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/roomNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Например: 215"
+                android:background="@drawable/edit_text_background"
+                android:padding="14dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/primaryTextColor"
+                android:textColorHint="@color/hintTextColor"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Приоритет"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"/>
+
+            <Spinner
+                android:id="@+id/prioritySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/edit_text_background"
+                android:padding="8dp"
+                android:paddingStart="12dp"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Категория"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"/>
+
+            <Spinner
+                android:id="@+id/categorySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/edit_text_background"
+                android:padding="8dp"
+                android:paddingStart="12dp"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Срок выполнения (необязательно)"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"/>
+
+            <Button
+                android:id="@+id/dueDateButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Выбрать дату"
+                android:background="@drawable/button_background_dark"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="14sp"
+                android:stateListAnimator="@null"
+                android:layout_marginBottom="20dp"/>
+
+            <Button
+                android:id="@+id/attachFileButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Прикрепить файл"
+                android:background="@drawable/button_background_dark"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:stateListAnimator="@null"
+                android:layout_marginBottom="10dp"/>
+
+            <Button
+                android:id="@+id/saveTaskButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Создать заявку"
+                android:background="@drawable/button_background"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="com_google_android_gms_fonts_certs" />
+    <string-array name="status_array">
+        <item>All</item>
+        <item>Pending</item>
+        <item>In Progress</item>
+        <item>Completed</item>
+    </string-array>
+
+    <string-array name="task_status_array">
+        <item>Pending</item>
+        <item>In Progress</item>
+        <item>Completed</item>
+    </string-array>
+
+    <string-array name="priority_array">
+        <item>Низкий</item>
+        <item>Средний</item>
+        <item>Высокий</item>
+        <item>Критический</item>
+    </string-array>
+
+    <string-array name="category_array">
+        <item>Сеть</item>
+        <item>Железо</item>
+        <item>ПО</item>
+        <item>Принтер</item>
+        <item>Другое</item>
+    </string-array>
+
+    <string-array name="sort_array">
+        <item>По дате ↓</item>
+        <item>По дате ↑</item>
+        <item>По приоритету</item>
+        <item>По названию</item>
+    </string-array>
 </resources>

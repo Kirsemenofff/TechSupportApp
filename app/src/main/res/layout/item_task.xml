@@ -3,29 +3,112 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@drawable/rounded_background"
+    android:padding="16dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp">
 
-    <TextView
-        android:id="@+id/taskTitle"
-        android:layout_width="wrap_content"
+    <!-- Title + status chip -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Task Title"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:paddingBottom="4dp"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="6dp">
 
-    <TextView
-        android:id="@+id/taskStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Task Status"
-        android:textSize="16sp"
-        android:paddingBottom="4dp"/>
+        <TextView
+            android:id="@+id/taskTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Название заявки"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/primaryTextColor"
+            android:layout_marginEnd="8dp"/>
 
+        <TextView
+            android:id="@+id/taskStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_background"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:text="Статус"
+            android:textSize="11sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Description -->
     <TextView
         android:id="@+id/taskDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Task Description"
-        android:textSize="14sp"/>
+        android:text="Описание проблемы"
+        android:textSize="13sp"
+        android:textColor="@color/secondaryTextColor"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Priority + date row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/taskPriority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_background"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="3dp"
+            android:text="Средний"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/taskDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=""
+            android:textSize="11sp"
+            android:textColor="@color/hintTextColor"/>
+    </LinearLayout>
+
+    <!-- Category + deadline row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="6dp">
+
+        <TextView
+            android:id="@+id/taskCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_background"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="3dp"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryLight"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/taskDeadline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="11sp"
+            android:textColor="@color/hintTextColor"
+            android:visibility="gone"/>
+    </LinearLayout>
+
 </LinearLayout>

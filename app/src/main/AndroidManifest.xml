@@ -7,12 +7,13 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
+        android:name=".SupportApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        android:theme="@style/Theme.MobileTechSupport">
 
         <activity
             android:name=".MainActivity"
@@ -52,8 +53,10 @@
             android:name=".ChatActivity"
             android:exported="false"/>
         <activity android:name=".StatusHistoryActivity"
-            android:exported="true" /> <!-- Make sure this line is correctly set if you target Android 12 or above -->
-
+            android:exported="true"/>
+        <activity
+            android:name=".EditTaskActivity"
+            android:exported="false"/>
 
     </application>
 </manifest>
